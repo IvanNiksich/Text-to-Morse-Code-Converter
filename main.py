@@ -58,6 +58,7 @@ morse_dict = {"A": ".-",
               ".": ".-.-.-",
               ",": "--..--",
               "?": "..--..",
+              # "¿": "..-.-",     # Not really morse code?
               "'": ".----.",    # Carefull here
               "!": "-.-.--",
               "/": "-..-.",
@@ -73,28 +74,69 @@ morse_dict = {"A": ".-",
               '"': ".-..-.",    # Carefull here
               "$": "...-..-",
               "@": ".--.-.",
-              " ": " "  # space is space
+              # " ": " "  # space is space
+              " ": "/",   # Space symbol in Morse
+              "#": "......",
+              "%": "-----.-",
+              "*": "-.-.-",
+              "^": ".-.-.",
+              "<": "-.--.",
+              ">": "-.--.-",
+              "{": "-.-..",
+              "}": "-.-.-",
+              "[": "-.-..",
+              "]": "-.-.-",
+              "\\": "-..-.",
+              "|": ".-.-.-",
+              "~": ".-...-",
+              "`": ".-..-.",
               }
 
 array_text_to_convert = []  # Initialize the array
+array_morse_text = []
+
+
+def get_text():
+    # Get text to encode
+    text_to_convert = input("Write the text you would like to convert and press enter.\n")
+
+    # Transform text to uppercase
+    text_to_convert = text_to_convert.upper()
+
+    # Split text into chars and store them in an array
+    for character in text_to_convert:
+        array_text_to_convert.append(character)
+    return None
+
+
+def convert_text():
+    for element in array_text_to_convert:
+        try:
+            array_morse_text.append(morse_dict[element])
+            array_morse_text.append(" ")
+        except KeyError:
+            print(f"Sorry, '{element}' is not supported by this program. We only support ASCI symbols.")
+            # Clear the arrays
+            array_text_to_convert.clear()
+            array_morse_text.clear()
+            # Get a new text to convert
+            get_text()
+            convert_text()
+            return None
+    return None
+
 
 # Program
 
-# Get text to encode
+# Get text to encode and process it
 print("Hello, this is a text to morse code converter.\n")
-text_to_convert = input("Write the text you would like to convert and press enter.\n")
-
-# Transform text to uppercase
-text_to_convert = text_to_convert.upper()
-
-# Split text into chars and store them in an array
-for character in text_to_convert:
-    array_text_to_convert.append(character)
+get_text()
 
 # Go through the array translating every char with the morse_dict and store the translation in a second array
-
+convert_text()
 
 # Join translated array into a string to print as the result
-# Look out for the " and ' conversion they might make a mess.
+morse_text = "".join(array_morse_text)
 
-print(array_text_to_convert)
+# Look out for the " and ' conversion they might make a mess.
+print(morse_text)
