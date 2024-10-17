@@ -140,3 +140,13 @@ morse_text = "".join(array_morse_text)
 
 # Look out for the " and ' conversion they might make a mess.
 print(morse_text)
+
+
+# I ask for the text to convert to morse code with an input, then convert it to uppercase, split it by chars
+# and store them in a list. Then I use the list as keys for a dict with the correspondences between ASCI
+# chars and the morse code of that char. In this step I use a try/except to cath error produced by symbols
+# that are not in the dict. Afterward I store the corresponding morse codes in another list, then I
+# join said list and store it as a string to print.
+#
+# This project was relatively easy, I don't think I would do it differently in any way.
+# It's a pretty straight forward solution.
